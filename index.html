@@ -346,6 +346,11 @@
         </div>
 
         <div class="form-row">
+          <label for="fEmail">Email <span aria-hidden="true">*</span></label>
+          <input type="email" id="fEmail" name="email" autocomplete="email" required>
+        </div>
+
+        <div class="form-row">
           <label for="fSegment">Segment <span aria-hidden="true">*</span></label>
           <select id="fSegment" name="segment" required>
             <option value="" disabled selected>Select your segment</option>
@@ -369,6 +374,9 @@
           <label for="fMessage">Message</label>
           <textarea id="fMessage" name="message" rows="4"></textarea>
         </div>
+
+        <!-- Honeypot: real visitors never see or fill this. Bots that fill every field trip it. -->
+        <input type="text" id="fWebsite" name="website" autocomplete="off" tabindex="-1" aria-hidden="true" style="position:absolute;left:-9999px" value="">
 
         <button type="submit" class="btn btn-primary btn-block">Request Demo</button>
         <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>

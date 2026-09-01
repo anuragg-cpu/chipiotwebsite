@@ -39,10 +39,13 @@ incomplete:
 - **Brochure PDF**: `assets/brochure/ABHAY-Product-Brochure.pdf` is the three
   segment decks (Builders, Housing Societies, Coworking) concatenated as-is.
   Swap in a purpose-built general brochure if/when one exists.
-- **Form backend**: the demo request form (`#demoForm`) submits via a
-  `mailto:` link to anuragg@chipiotembedded.com as a working interim path —
-  no hosted backend (Formspree, Netlify Forms, custom API) has been wired up
-  yet. See `assets/js/main.js` to swap in a real endpoint.
+- **Form backend**: the demo request form (`#demoForm`) posts leads as JSON
+  to the ABHAY Leads public intake endpoint (see `LEAD_INTAKE_URL` in
+  `assets/js/main.js`). The URL embeds a write-only "create lead" token —
+  by design safe to expose in public client-side JS, since it can only
+  create leads, nothing else. Includes a hidden honeypot field
+  (`#fWebsite`) for basic spam filtering, per the endpoint's contract.
+  **Not yet verified end-to-end** — see the note below.
 - **Canonical/OG URL**: no `<link rel="canonical">` is set (a guessed one
   was removed — a wrong canonical actively hurts SEO). Add the real one
   once the domain is live. Same for `og:image`.
@@ -51,6 +54,20 @@ incomplete:
   (offline-first, no WiFi/app dependency) rather than from a dedicated deck
   like the other four segments — worth a sanity check against real customer
   conversations in those verticals.
+
+## CRM integration status
+
+The form is wired to `https://server.tail9f05c4.ts.net/public/intake/...`
+(a Tailscale-hosted endpoint from a separate CRM project) exactly per the
+contract it published: JSON POST, `name`/`company`/`email`/`phone`/
+`segment`/`message`/`website` fields, honeypot spam filtering, 200/429/400
+response handling. **This has not been confirmed reachable from a live
+browser yet** — automated testing during development couldn't complete a
+TLS handshake to that host (timed out at the SSL layer, while unrelated
+HTTPS sites worked fine from the same network path), which usually means
+the Tailscale Funnel wasn't actively serving traffic at that moment rather
+than a problem with this integration. Before relying on it: submit a real
+test lead from the live site and confirm it lands in the CRM.
 
 ## Brand system
 

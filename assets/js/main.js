@@ -23,15 +23,33 @@
   var yearEl = document.getElementById("year");
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-  // Demo request form
-  // No hosted form backend (Formspree/Netlify/custom API) has been chosen yet,
-  // so this submits via a mailto: link to the real ABHAY inbox as a working
-  // interim path. Swap this for a fetch() to a real endpoint once one exists.
+  // Demo request form — submits leads to the ABHAY Leads public intake endpoint.
+  // The token in this URL is a write-only "create lead" token, safe to embed
+  // in public client-side JS (it cannot read, update, or delete anything).
+  var LEAD_INTAKE_URL = "https://server.tail9f05c4.ts.net/public/intake/F9_sfVExt04at5T344_7mTfqWwHC0L6lDzD8JeBjDJc";
+
   var form = document.getElementById("demoForm");
   var status = document.getElementById("formStatus");
-  var DEMO_REQUEST_EMAIL = "anuragg@chipiotembedded.com";
+  var submitBtn = form ? form.querySelector("button[type=submit]") : null;
 
-  if (form && status) {
+  async function submitLead(data) {
+    var resp;
+    try {
+      resp = await fetch(LEAD_INTAKE_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+      });
+    } catch (err) {
+      return { success: false, message: "Couldn't reach the server — check your connection and try again." };
+    }
+
+    if (resp.ok) return { success: true };
+    if (resp.status === 429) return { success: false, message: "Too many submissions — please try again shortly." };
+    return { success: false, message: "Something went wrong — please try again." };
+  }
+
+  if (form && status && submitBtn) {
     form.addEventListener("submit", function (e) {
       e.preventDefault();
 
@@ -40,29 +58,30 @@
         return;
       }
 
-      var name = document.getElementById("fName").value.trim();
-      var company = document.getElementById("fCompany").value.trim();
-      var segment = document.getElementById("fSegment").value;
-      var phone = document.getElementById("fPhone").value.trim();
-      var message = document.getElementById("fMessage").value.trim();
+      var data = {
+        name: document.getElementById("fName").value.trim(),
+        company: document.getElementById("fCompany").value.trim(),
+        email: document.getElementById("fEmail").value.trim(),
+        phone: document.getElementById("fPhone").value.trim(),
+        segment: document.getElementById("fSegment").value,
+        message: document.getElementById("fMessage").value.trim(),
+        website: document.getElementById("fWebsite").value
+      };
 
-      var subject = "ABHAY Demo Request — " + company;
-      var body = [
-        "Name: " + name,
-        "Company: " + company,
-        "Segment: " + segment,
-        "Phone: " + phone,
-        "",
-        "Message:",
-        message || "(none)"
-      ].join("\n");
+      submitBtn.disabled = true;
+      status.classList.remove("success");
+      status.textContent = "Sending…";
 
-      window.location.href = "mailto:" + DEMO_REQUEST_EMAIL
-        + "?subject=" + encodeURIComponent(subject)
-        + "&body=" + encodeURIComponent(body);
-
-      status.textContent = "Opening your email app to send this to " + DEMO_REQUEST_EMAIL + ". If nothing opens, email us directly.";
-      status.classList.add("success");
+      submitLead(data).then(function (result) {
+        submitBtn.disabled = false;
+        if (result.success) {
+          status.textContent = "Thanks — we'll be in touch shortly.";
+          status.classList.add("success");
+          form.reset();
+        } else {
+          status.textContent = result.message;
+        }
+      });
     });
   }
 })();

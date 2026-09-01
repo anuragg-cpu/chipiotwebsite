@@ -7,8 +7,21 @@ ChipIOT Embedded Solutions (innovation arm of Paras Telecom Pvt. Ltd.).
 
 Static HTML + CSS + vanilla JS. No framework, build step, or backend — this is
 a single-page marketing site with a client-side-validated lead form, which is
-fully served by plain static files. Deploy by pointing any static host
-(Netlify, Vercel, GitHub Pages, S3, etc.) at this directory.
+fully served by plain static files.
+
+## Deployment
+
+Hosted on **GitHub Pages** (free, no separate account needed since the repo
+already lives on GitHub) at **abhay.chipiotembedded.com**. The `CNAME` file
+in the repo root tells GitHub Pages which custom domain to serve.
+
+To finish activating it:
+1. In this repo's GitHub Settings → Pages, set Source to "Deploy from a
+   branch", branch `main`, folder `/ (root)`.
+2. At your DNS provider for chipiotembedded.com (Squarespace), add a CNAME
+   record: host `abhay`, value `anuragg-cpu.github.io`.
+3. Once DNS propagates, GitHub auto-issues an HTTPS certificate — enable
+   "Enforce HTTPS" in the same Pages settings page when it becomes available.
 
 ## Structure
 
@@ -36,9 +49,6 @@ incomplete:
 - **Gallery**: has 5 real product photos; the "endpoint device, in-situ /
   mounted" angle was dropped rather than left as a placeholder box, since no
   source material has that shot yet.
-- **Brochure PDF**: `assets/brochure/ABHAY-Product-Brochure.pdf` is the three
-  segment decks (Builders, Housing Societies, Coworking) concatenated as-is.
-  Swap in a purpose-built general brochure if/when one exists.
 - **Form backend**: the demo request form (`#demoForm`) posts leads as JSON
   to the ABHAY Leads public intake endpoint (see `LEAD_INTAKE_URL` in
   `assets/js/main.js`). The URL embeds a write-only "create lead" token —
@@ -46,9 +56,6 @@ incomplete:
   create leads, nothing else. Includes a hidden honeypot field
   (`#fWebsite`) for basic spam filtering, per the endpoint's contract.
   **Not yet verified end-to-end** — see the note below.
-- **Canonical/OG URL**: no `<link rel="canonical">` is set (a guessed one
-  was removed — a wrong canonical actively hurts SEO). Add the real one
-  once the domain is live. Same for `og:image`.
 - **Segment cards without a source deck**: System Integrator, Hospital, and
   Campus one-liners were written from the site's own established positioning
   (offline-first, no WiFi/app dependency) rather than from a dedicated deck

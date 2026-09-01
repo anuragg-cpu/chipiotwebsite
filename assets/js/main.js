@@ -24,13 +24,12 @@
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
   // Demo request form
-  // NOTE: No backend/endpoint is wired up yet (see the on-page placeholder note).
-  // This handler only does client-side validation + a visible status message so the
-  // form is demoable. Replace this with a real submit (fetch to Formspree/Netlify/
-  // custom API, or a plain <form action="..." method="POST">) once the endpoint
-  // is confirmed.
+  // No hosted form backend (Formspree/Netlify/custom API) has been chosen yet,
+  // so this submits via a mailto: link to the real ABHAY inbox as a working
+  // interim path. Swap this for a fetch() to a real endpoint once one exists.
   var form = document.getElementById("demoForm");
   var status = document.getElementById("formStatus");
+  var DEMO_REQUEST_EMAIL = "anuragg@chipiotembedded.com";
 
   if (form && status) {
     form.addEventListener("submit", function (e) {
@@ -41,8 +40,29 @@
         return;
       }
 
-      status.textContent = "Form backend not yet connected — this is a front-end preview only. See the note above the form.";
-      status.classList.remove("success");
+      var name = document.getElementById("fName").value.trim();
+      var company = document.getElementById("fCompany").value.trim();
+      var segment = document.getElementById("fSegment").value;
+      var phone = document.getElementById("fPhone").value.trim();
+      var message = document.getElementById("fMessage").value.trim();
+
+      var subject = "ABHAY Demo Request — " + company;
+      var body = [
+        "Name: " + name,
+        "Company: " + company,
+        "Segment: " + segment,
+        "Phone: " + phone,
+        "",
+        "Message:",
+        message || "(none)"
+      ].join("\n");
+
+      window.location.href = "mailto:" + DEMO_REQUEST_EMAIL
+        + "?subject=" + encodeURIComponent(subject)
+        + "&body=" + encodeURIComponent(body);
+
+      status.textContent = "Opening your email app to send this to " + DEMO_REQUEST_EMAIL + ". If nothing opens, email us directly.";
+      status.classList.add("success");
     });
   }
 })();

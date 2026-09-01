@@ -22,30 +22,35 @@ assets/brochure/         ABHAY-Product-Brochure.pdf — merged from the three
                          segment decks (Builders, Housing Societies, Coworking)
 ```
 
-## What still needs to be filled in
+## Known gaps (no more `[COPY:]`/`[SPEC:]`/`[PLACEHOLDER:]` markers in the code)
 
-- **Copy**: every remaining `[COPY: ...]` placeholder in `index.html` is where
-  final marketing copy goes — this covers the technical specs numbers, three
-  segments with no source deck yet (System Integrator, Hospital, Campus), a
-  couple of comparison-table cells, and the trust-section client mention.
-- **Specs**: `[SPEC: ...]` placeholders in the technical specifications table
-  (How ABHAY Works section) need real numbers (range, battery life, panel
-  capacity, etc).
-- **Photography**: one gallery slot (`.img-placeholder`, endpoint device
-  in-situ/mounted) still needs a real photo — none of the source material has
-  that angle yet.
+Every bracketed placeholder has been filled with real content or removed —
+nothing left says `[COPY: ...]` on the page. What's still genuinely
+incomplete:
+
+- **Technical specs table**: only has the 4 specs we have real numbers for
+  (frequency band, regulatory compliance, connectivity dependency, range).
+  Battery life, receiver panel capacity, alert output, installation, and
+  certifications were dropped from the table rather than invented — add
+  those rows back once the numbers exist.
+- **Gallery**: has 5 real product photos; the "endpoint device, in-situ /
+  mounted" angle was dropped rather than left as a placeholder box, since no
+  source material has that shot yet.
 - **Brochure PDF**: `assets/brochure/ABHAY-Product-Brochure.pdf` is the three
   segment decks (Builders, Housing Societies, Coworking) concatenated as-is.
   Swap in a purpose-built general brochure if/when one exists.
-- **Form backend**: the demo request form (`#demoForm`) has no backend wired
-  up. It currently only does client-side validation and shows a placeholder
-  status message on submit (see `assets/js/main.js`). Once a form
-  endpoint is confirmed (Formspree, Netlify Forms, custom API, etc.), wire
-  the real submit in.
-- **Footer contact details**: street address, phone, and email in the footer
-  are placeholders.
-- **Canonical/OG URL**: `index.html` has a placeholder canonical URL
-  (`https://www.chipiot.in/abhay`) — update once the real domain is set.
+- **Form backend**: the demo request form (`#demoForm`) submits via a
+  `mailto:` link to anuragg@chipiotembedded.com as a working interim path —
+  no hosted backend (Formspree, Netlify Forms, custom API) has been wired up
+  yet. See `assets/js/main.js` to swap in a real endpoint.
+- **Canonical/OG URL**: no `<link rel="canonical">` is set (a guessed one
+  was removed — a wrong canonical actively hurts SEO). Add the real one
+  once the domain is live. Same for `og:image`.
+- **Segment cards without a source deck**: System Integrator, Hospital, and
+  Campus one-liners were written from the site's own established positioning
+  (offline-first, no WiFi/app dependency) rather than from a dedicated deck
+  like the other four segments — worth a sanity check against real customer
+  conversations in those verticals.
 
 ## Brand system
 

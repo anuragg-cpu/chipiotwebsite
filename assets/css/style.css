@@ -87,6 +87,7 @@ ul{ margin:0; padding:0; list-style:none; }
   display:flex; align-items:center; justify-content:center;
   font-family:var(--head); font-weight:700; font-size:1.2rem; flex:none;
 }
+.brand-logo{ height:34px; width:auto; flex:none; }
 .brand-text{ display:flex; flex-direction:column; line-height:1.15; }
 .brand-product{ font-family:var(--head); font-weight:700; letter-spacing:0.04em; font-size:1.15rem; }
 .brand-sub{ font-family:var(--mono); font-size:0.62rem; color:var(--ink-soft); text-transform:uppercase; letter-spacing:0.03em; }

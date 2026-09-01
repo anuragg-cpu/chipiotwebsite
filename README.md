@@ -17,23 +17,26 @@ index.html              All sections (hero, problem, how-it-works, segments,
                          offline-first comparison, trust, gallery, CTA/form, footer)
 assets/css/style.css     Design tokens (brand colors/fonts) + all styling
 assets/js/main.js        Mobile nav toggle, footer year, demo-form handling
-assets/img/              Drop real product photography here
-assets/brochure/         Drop the product brochure PDF here
+assets/img/              Real product photography, sourced from the sales decks
+assets/brochure/         ABHAY-Product-Brochure.pdf — merged from the three
+                         segment decks (Builders, Housing Societies, Coworking)
 ```
 
 ## What still needs to be filled in
 
-- **Copy**: every `[COPY: ...]` placeholder in `index.html` is where final
-  marketing copy goes. Section structure won't need to change to drop it in.
+- **Copy**: every remaining `[COPY: ...]` placeholder in `index.html` is where
+  final marketing copy goes — this covers the technical specs numbers, three
+  segments with no source deck yet (System Integrator, Hospital, Campus), a
+  couple of comparison-table cells, and the trust-section client mention.
 - **Specs**: `[SPEC: ...]` placeholders in the technical specifications table
   (How ABHAY Works section) need real numbers (range, battery life, panel
   capacity, etc).
-- **Photography**: every `.img-placeholder` box (`[PLACEHOLDER: ...]`) marks
-  where a real product photo goes. Replace the placeholder `<div>` with an
-  `<img>` tag pointing to a file in `assets/img/`.
-- **Brochure PDF**: the "Download Brochure" button links to
-  `assets/brochure/ABHAY-Product-Brochure.pdf`, which does not exist yet —
-  add the real file at that path (or update the `href`).
+- **Photography**: one gallery slot (`.img-placeholder`, endpoint device
+  in-situ/mounted) still needs a real photo — none of the source material has
+  that angle yet.
+- **Brochure PDF**: `assets/brochure/ABHAY-Product-Brochure.pdf` is the three
+  segment decks (Builders, Housing Societies, Coworking) concatenated as-is.
+  Swap in a purpose-built general brochure if/when one exists.
 - **Form backend**: the demo request form (`#demoForm`) has no backend wired
   up. It currently only does client-side validation and shows a placeholder
   status message on submit (see `assets/js/main.js`). Once a form

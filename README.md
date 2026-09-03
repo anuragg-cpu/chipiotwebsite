@@ -26,48 +26,14 @@ To finish activating it:
 ## Structure
 
 ```
-index.html              All sections (hero, demo-video, problem, how-it-works,
-                         offline-first comparison, segments, trust, gallery,
-                         CTA/form, footer) + the lightbox dialog markup
-assets/css/style.css     Design tokens (incl. dark-mode token overrides) + all styling
-assets/js/main.js        Mobile nav, dark-mode toggle, accordions, scroll-reveal,
-                         video carousel, lightbox, demo-form handling
-assets/img/               Real product photography + video poster frames
-assets/video/            4 real demo clips (3 landscape + 1 vertical), sourced
-                         from the ABHAY WhatsApp footage
+index.html              All sections (hero, problem, how-it-works, segments,
+                         offline-first comparison, trust, gallery, CTA/form, footer)
+assets/css/style.css     Design tokens (brand colors/fonts) + all styling
+assets/js/main.js        Mobile nav toggle, footer year, demo-form handling
+assets/img/              Real product photography, sourced from the sales decks
 assets/brochure/         ABHAY-Product-Brochure.pdf — merged from the three
                          segment decks (Builders, Housing Societies, Coworking)
 ```
-
-## Features added in the 2026 design pass
-
-- **Full-bleed hero** with a diagonal gradient overlay on the real product
-  photo (the one place a gradient/duotone treatment is applied to a photo —
-  every other product shot on the page stays untreated by design).
-- **"See ABHAY in Action" video carousel** (`#demo-video`, right after the
-  hero): 4 real clips, one loaded/playing at a time. Nothing is fetched
-  until the carousel scrolls into view; switching clips unloads the
-  outgoing video's `src` so at most one is ever buffered. Vertical clip
-  renders in a phone-frame container.
-- **Icon infographic** replaces the old photo-only "How ABHAY Works" flow;
-  the 3 original photos moved to a de-emphasized thumbnail strip that opens
-  a lightbox (`<dialog>`-based, Escape/backdrop-click/button all close it).
-- **Accordions** on the Problem and Segments cards — collapsed by default,
-  real DOM content at all times (not `display:none`-until-JS, so it stays
-  crawlable), toggled via a real click handler with correct
-  `aria-expanded`/`aria-controls`.
-- **Dark mode toggle** in the header, persisted to `localStorage`, applied
-  before first paint via an inline script (no flash of the wrong theme).
-  The CTA band, demo form, footer, and video-carousel section are
-  deliberately fixed-color cards that don't follow the toggle — same
-  pattern as the footer already used, extended consistently everywhere a
-  component's colors are hardcoded rather than token-based.
-- **Scroll-triggered fade-up** on each section's heading, and an animated
-  "draw-in" on the how-it-works connector arrows, both skipped entirely
-  under `prefers-reduced-motion: reduce`.
-- Gallery photos now have a caption + spec-tag line under each image.
-- `#offline-first` moved to appear right after `#how-it-works`, before
-  `#segments`; nav links reordered to match.
 
 ## Known gaps (no more `[COPY:]`/`[SPEC:]`/`[PLACEHOLDER:]` markers in the code)
 

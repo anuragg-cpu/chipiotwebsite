@@ -191,6 +191,28 @@ ul{ margin:0; padding:0; list-style:none; }
   padding:7px 14px; background:rgba(255,255,255,0.1);
 }
 
+.hero-video-trigger{
+  position:relative; display:inline-flex; align-items:center; gap:14px;
+  margin-top:22px; padding:0; border:none; background:none; cursor:pointer;
+  text-align:left; font:inherit; color:#fff;
+}
+.hero-video-trigger img{
+  width:72px; height:128px; object-fit:cover; border-radius:10px; display:block; flex:none;
+  border:1px solid rgba(255,255,255,0.35);
+}
+.hero-video-trigger-icon{
+  position:absolute; top:0; left:0; width:72px; height:128px;
+  display:flex; align-items:center; justify-content:center;
+  background:rgba(10,10,15,0.4); border-radius:10px; transition:background-color .15s ease;
+}
+.hero-video-trigger-icon svg{ width:28px; height:28px; color:#fff; filter:drop-shadow(0 1px 3px rgba(0,0,0,0.5)); }
+.hero-video-trigger:hover .hero-video-trigger-icon,
+.hero-video-trigger:focus-visible .hero-video-trigger-icon{ background:rgba(250,150,0,0.55); }
+.hero-video-trigger-label{
+  font-family:var(--mono); font-size:0.8rem; color:#fff; max-width:15ch;
+  text-transform:uppercase; letter-spacing:0.03em;
+}
+
 @media (min-width:900px){
   .hero{ padding:130px 0 140px; }
 }
@@ -294,9 +316,13 @@ ul{ margin:0; padding:0; list-style:none; }
 .lightbox::backdrop{ background:rgba(0,0,0,0.82); }
 .lightbox img{ max-width:90vw; max-height:85vh; display:block; border-radius:var(--radius); }
 .lightbox-close{
-  position:absolute; top:-14px; right:-14px; width:36px; height:36px; border-radius:50%;
+  position:absolute; top:-14px; right:-14px; z-index:1; width:36px; height:36px; border-radius:50%;
   border:none; background:#14161F; color:#fff; font-size:1.3rem; line-height:1; cursor:pointer;
 }
+
+.video-lightbox{ border:none; padding:0; background:transparent; max-width:90vw; max-height:90vh; }
+.video-lightbox::backdrop{ background:rgba(0,0,0,0.86); }
+.video-lightbox video{ display:block; border-radius:var(--radius); background:#000; }
 
 /* ---------- Accordion (problem + segments) ---------- */
 .accordion-item{

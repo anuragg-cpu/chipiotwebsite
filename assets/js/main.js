@@ -297,4 +297,33 @@
       lightboxImg.src = "";
     });
   }
+
+  // Video modal for the hero explainer film
+  var videoModal = document.getElementById("videoModal");
+  var videoModalPlayer = document.getElementById("videoModalPlayer");
+  if (videoModal && videoModalPlayer) {
+    document.querySelectorAll("[data-video-lightbox-src]").forEach(function (trigger) {
+      trigger.addEventListener("click", function () {
+        videoModalPlayer.poster = trigger.getAttribute("data-video-lightbox-poster") || "";
+        videoModalPlayer.src = trigger.getAttribute("data-video-lightbox-src");
+        videoModal.showModal();
+        videoModalPlayer.play();
+      });
+    });
+
+    videoModal.querySelectorAll("[data-video-modal-close]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        videoModal.close();
+      });
+    });
+
+    videoModal.addEventListener("click", function (e) {
+      if (e.target === videoModal) videoModal.close();
+    });
+
+    videoModal.addEventListener("close", function () {
+      videoModalPlayer.pause();
+      videoModalPlayer.src = "";
+    });
+  }
 })();

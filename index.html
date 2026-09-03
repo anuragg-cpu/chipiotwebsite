@@ -79,7 +79,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="assets/css/style.css?v=20260903">
+<link rel="stylesheet" href="assets/css/style.css?v=20260903b">
 </head>
 <body>
 
@@ -143,6 +143,13 @@
           <span class="hero-badge">Offline-first &mdash; no WiFi / internet / cellular required</span>
           <span class="hero-badge">WPC ETA compliant</span>
         </div>
+        <button class="hero-video-trigger" type="button" data-video-lightbox-src="assets/video/abhay-explainer.mp4" data-video-lightbox-poster="assets/img/abhay-explainer-poster.jpg" aria-label="Play the ABHAY explainer video">
+          <img src="assets/img/abhay-explainer-poster.jpg" alt="" width="72" height="128">
+          <span class="hero-video-trigger-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          </span>
+          <span class="hero-video-trigger-label">Watch the 30-sec film</span>
+        </button>
       </div>
     </div>
   </section>
@@ -659,6 +666,12 @@
   <img src="" alt="" id="lightboxImg">
 </dialog>
 
-<script src="assets/js/main.js?v=20260903"></script>
+<!-- Video modal for the hero explainer film -->
+<dialog class="video-lightbox" id="videoModal">
+  <button class="lightbox-close" data-video-modal-close type="button" aria-label="Close video">&times;</button>
+  <video id="videoModalPlayer" controls playsinline style="max-height:85vh; max-width:100%;"></video>
+</dialog>
+
+<script src="assets/js/main.js?v=20260903b"></script>
 </body>
 </html>

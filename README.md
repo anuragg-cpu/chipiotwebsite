@@ -23,6 +23,21 @@ To finish activating it:
 3. Once DNS propagates, GitHub auto-issues an HTTPS certificate — enable
    "Enforce HTTPS" in the same Pages settings page when it becomes available.
 
+### Cache-busting on deploy
+
+GitHub Pages serves `assets/css/style.css` and `assets/js/main.js` with
+`cache-control: max-age=600` at fixed URLs. Without a version marker, a
+visitor whose browser already cached those files (or who has the page open)
+can end up with the new `index.html` paired with a stale cached CSS/JS —
+or vice versa — for up to 10 minutes after a deploy, which breaks anything
+the new markup and old script/styles disagree on.
+
+Both are referenced with a `?v=YYYYMMDD` query string
+(`assets/css/style.css?v=20260903`, `assets/js/main.js?v=20260903`) to force
+a fresh fetch whenever they change. **Bump that date whenever you edit
+`style.css` or `main.js`** — a stale `?v=` defeats the cache-bust and brings
+back the mismatch risk this exists to prevent.
+
 ## Structure
 
 ```
